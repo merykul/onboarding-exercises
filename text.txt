@@ -1,5 +1,5 @@
-not empty line
+line not empty
 
-yyy
-
+yy
+yy
 something without needed s*mbol
