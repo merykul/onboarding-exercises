@@ -29,8 +29,13 @@ class FileAnalyzer
   def count_y_symbols
     count = 0
     File.open(@file, 'r') do |file|
-      file.each_char do |char|
-        count += 1 if 'y'.include?(char)
+      file.each_line do |line|
+        words = line.split(" ")
+        words.each do |word|
+          word.each_char do |char|
+            count += 1 if 'y'.include?(char)
+          end
+        end
       end
     end
     puts "File has #{count} y"
