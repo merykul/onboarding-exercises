@@ -10,15 +10,20 @@ class FileAnalyzer
   private
 
   def count_empty_lines
-    empty_lines = 0
-    File.foreach(@file) do |line|
-      empty_lines += 1 if line.strip.empty?
+    if File.exist?(@file)
+      empty_lines = 0
+      File.foreach(@file) do |line|
+        empty_lines += 1 if line.strip.empty?
+      end
+      puts "Empty lines: #{empty_lines}"
+    else
+      puts "File with #{@file} path is not found. Please, check if you entered correct path."
     end
-    puts "Empty lines: #{empty_lines}"
   end
 
   def count_lines
-    #
+    lines = File.readlines(@file).length
+    puts "Lines count: #{lines}"
   end
 
   def count_y_symbols
