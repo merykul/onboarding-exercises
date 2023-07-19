@@ -54,4 +54,17 @@ class Library
     }
     @books << book
   end
+
+  def delete_book(id)
+    @books.delete_if { |book| book[:id] == id }
+  end
+
+  def sort_book(sort_by_value)
+    sorted_books = @books.sort_by! { |book| book[sort_by_value.to_sym] }
+    sorted_books.each { |book| puts book }
+  end
+
+  def random_book
+    puts "Your random book is #{@books.sample[:name]}"
+  end
 end
