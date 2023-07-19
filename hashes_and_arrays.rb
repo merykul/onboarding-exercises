@@ -31,7 +31,7 @@ class Library
   @books << book3
 
   def find_book(search_variable)
-    puts @books.any? { |book| book.values.include?(search_variable) }
+    @books.any? { |book| book.values.include?(search_variable) }
   end
 
   def update_book_status(id, new_status)
