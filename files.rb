@@ -17,9 +17,7 @@ class FileAnalyzer
 
   def count_empty_lines
     empty_lines = 0
-    File.foreach(@file) do |line|
-      empty_lines += 1 if line.strip.empty?
-    end
+    File.foreach(@file) { |line| empty_lines += 1 if line.strip.empty? }
     puts "Empty lines: #{empty_lines}"
   end
 
@@ -32,11 +30,9 @@ class FileAnalyzer
     count = 0
     File.open(@file, 'r') do |file|
       file.each_line do |line|
-        words = line.split(" ")
+        words = line.split(' ')
         words.each do |word|
-          word.each_char do |char|
-            count += 1 if 'y'.include?(char)
-          end
+          word.each_char { |char| count += 1 if 'y'.include?(char) }
         end
       end
     end
