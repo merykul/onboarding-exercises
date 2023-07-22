@@ -60,12 +60,20 @@ class Library
   end
 
   def sort_books(sort_by, value = nil)
-    sorted_books = value ? @books.select { |book| book[sort_by.to_sym] == value } : @books
+    default_book_sorting_by(sort_by) unless value != nil
+    sorted_books = @books.select { |book| book[sort_by.to_sym] == value }
     sorted_books.sort_by! { |book| book[sort_by.to_sym] }
     puts sorted_books
   end
 
   def random_book
     puts "Your random book is #{@books.sample[:name]}"
+    end
+  
+  private
+  
+  def default_book_sorting_by (sort_by_value) 
+    sorted_books = @books.sort_by! { |book| book[sort_by_value.to_sym] } 
+    puts sorted_books 
   end
 end
