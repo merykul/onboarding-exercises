@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Library
+#class Library
   @books = []
 
   book1 = {
@@ -31,16 +31,16 @@ class Library
   @books << book3
 
   def find_book(search_variable)
-    @books.any? { |book| book.values.include?(search_variable) }
+    @books.find { |book| book.values.include?(search_variable) }
   end
 
   def update_book_status(id, new_status)
-    book = @books.find { |book| book[:id] == id }
-    if book
+    book = find_book(id)
+    if book.nil?
+      puts 'Book is not found in the Library'
+    else
       book[:status] = new_status
       puts "#{book[:name]} book new status is #{book[:status]}"
-    else
-      puts 'Book is not found in the Library'
     end
   end
 
@@ -76,5 +76,5 @@ class Library
     sorted_books = @books.sort_by! { |book| book[sort_by_value.to_sym] } 
     puts sorted_books 
   end
-end
-
+  #end
+update_book_status(1, 'new')
