@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#class Library
+class Library
   @books = []
 
   book1 = {
@@ -76,5 +76,4 @@
     sorted_books = @books.sort_by! { |book| book[sort_by_value.to_sym] } 
     puts sorted_books 
   end
-  #end
-update_book_status(1, 'new')
+end
