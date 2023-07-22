@@ -40,4 +40,5 @@ class FileAnalyzer
   end
 end
 
-FileAnalyzer.new('text1.txt')
+FileAnalyzer.new('text.txt')
+FileAnalyzer.new('invalid.txt')
