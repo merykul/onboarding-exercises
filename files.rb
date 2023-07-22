@@ -8,7 +8,7 @@ class FileAnalyzer
   private
 
   def file_analyze
-    return unless File.exist?(@file)
+    return puts 'File name is not valid, please check spelling or existence of the file' unless File.exist?(@file)
 
     count_empty_lines
     count_lines
@@ -40,4 +40,4 @@ class FileAnalyzer
   end
 end
 
-FileAnalyzer.new('text.txt')
+FileAnalyzer.new('text1.txt')
