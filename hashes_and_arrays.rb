@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Library
+#class Library
   @books = []
 
   book1 = {
@@ -31,11 +31,16 @@ class Library
   @books << book3
 
   def find_books(criteria)
+    books = @books
+    result = []
     matched_books = []
     criteria.each do |key, value|
-      matched_books << @books.select { |book| book[key] == value }
+      matched_books << books.select { |book| book[key] == value }
     end
-    matched_books.flatten
+    criteria.each do |key, value|
+      result << matched_books.select { |book| book[key] == value }
+    end
+    result.flatten
   end
 
   def update_book_status(id, new_status)
@@ -77,4 +82,5 @@ class Library
   def default_book_sorting_by(books, sort_by_value)
     books.sort_by! { |book| book[sort_by_value.to_sym] }
   end
-end
+  #end
+puts find_books({author: 'Edith Eva Eger',  status: 'available'})
