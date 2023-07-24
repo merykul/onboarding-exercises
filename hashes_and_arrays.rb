@@ -35,7 +35,7 @@ class Library
     criteria.each do |key, value|
       matched_books << @books.select { |book| book[key] == value }
     end
-    matched_books
+    matched_books.flatten
   end
 
   def update_book_status(id, new_status)
