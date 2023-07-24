@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#class Library
+class Library
   @books = []
 
   book1 = {
@@ -73,5 +73,4 @@
   def default_book_sorting_by(books, sort_by_value)
     books.sort_by! { |book| book[sort_by_value.to_sym] }
   end
-  #end
-puts find_books({author: 'Edith Eva Eger',  status: 'available'})
+end
