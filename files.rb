@@ -12,7 +12,7 @@ class FileAnalyzer
 
     count_empty_lines
     count_lines
-    count_y_symbols
+    count_lines_with_y
   end
 
   def count_empty_lines
@@ -26,19 +26,12 @@ class FileAnalyzer
     puts "Lines count: #{lines}"
   end
 
-  def count_y_symbols
-    count_y = 0
-    File.open(@file, 'r') do |file|
-      file.each_line do |line|
-        words = line.split(' ')
-        words.each do |word|
-          word.each_char { |char| count_y += 1 if char == 'y' }
-        end
-      end
-    end
-    puts "File has #{count_y} y"
+  def count_lines_with_y
+    lines_with_y_symbol = 0
+    File.foreach(@file) { |line| lines_with_y_symbol += 1 if line.include?('y') }
+    puts "File has #{lines_with_y_symbol} y"
   end
 end
 
-FileAnalyzer.new('text.txt')
+FileAnalyzer.new('onboarding-exercises/text.txt')
 FileAnalyzer.new('invalid.txt')
