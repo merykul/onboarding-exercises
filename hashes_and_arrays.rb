@@ -30,23 +30,12 @@ class Library
   }
   @books << book3
 
-  def find_books(search_criteria)
-    @books.select do |book|
-      matches = true
-      search_criteria.each do |key, value|
-        if book[key.to_s] != value
-          matches = false
-          break
-        end
-      end
-      matches
+  def find_books(criteria)
+    matched_books = []
+    criteria.each do |key, value|
+      matched_books = @books.select { |book| book[key] == value }
     end
-    # case field
-    # when :name, :id, :status, :author, :year
-    #   @books.select { |book| book[value] == search_variable }
-    # else
-    #   puts 'Search field is not valid'
-    # end
+    puts matched_books
   end
 
   def update_book_status(id, new_status)
@@ -74,10 +63,10 @@ class Library
     @books.delete_if { |book| book[:id] == id }
   end
 
-  def sort_books(sort_by, value = nil)
-    default_book_sorting_by(sort_by) unless value != nil
-    sorted_books = @books.select { |book| book[sort_by.to_sym] == value }
-    sorted_books.sort_by! { |book| book[sort_by.to_sym] }
+  def sort_books(sort_by, criteria = nil)
+    default_book_sorting_by(sort_by) unless criteria != nil
+    selected_books_to_sort = find_books(criteria)
+    sorted_books = selected_books_to_sort.sort_by! { |book| book[sort_by.to_sym] }
     puts sorted_books
   end
 
