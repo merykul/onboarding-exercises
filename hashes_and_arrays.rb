@@ -33,9 +33,9 @@ class Library
   def find_books(criteria)
     matched_books = []
     criteria.each do |key, value|
-      matched_books = @books.select { |book| book[key] == value }
+      matched_books << @books.select { |book| book[key] == value }
     end
-    puts matched_books
+    matched_books
   end
 
   def update_book_status(id, new_status)
@@ -44,7 +44,7 @@ class Library
       puts 'Book is not found in the Library'
     else
       book[:status] = new_status
-      puts "#{book[:name]} book new status is #{book[:status]}"
+      "#{book[:name]} book new status is #{book[:status]}"
     end
   end
 
@@ -64,10 +64,8 @@ class Library
   end
 
   def sort_books(sort_by, criteria = nil)
-    default_book_sorting_by(sort_by) unless criteria != nil
-    selected_books_to_sort = find_books(criteria)
-    sorted_books = selected_books_to_sort.sort_by! { |book| book[sort_by.to_sym] }
-    puts sorted_books
+    books_to_sort = criteria == nil ? @books : find_books(criteria)
+    default_book_sorting_by(books_to_sort, sort_by)
   end
 
   def random_book
@@ -76,8 +74,7 @@ class Library
   
   private
   
-  def default_book_sorting_by (sort_by_value) 
-    sorted_books = @books.sort_by! { |book| book[sort_by_value.to_sym] } 
-    puts sorted_books 
+  def default_book_sorting_by(books, sort_by_value)
+    books.sort_by! { |book| book[sort_by_value.to_sym] }
   end
 end
