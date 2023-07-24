@@ -30,17 +30,8 @@
   }
   @books << book3
 
-  def find_books(criteria)
-    books = @books
-    result = []
-    matched_books = []
-    criteria.each do |key, value|
-      matched_books << books.select { |book| book[key] == value }
-    end
-    criteria.each do |key, value|
-      result << matched_books.select { |book| book[key] == value }
-    end
-    result.flatten
+  def find_books(finder)
+    @books.select { |book| book.values_at(*finder.keys) == finder.values }
   end
 
   def update_book_status(id, new_status)
