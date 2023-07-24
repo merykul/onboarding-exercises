@@ -66,7 +66,7 @@ class Library
 
   def random_book
     puts "Your random book is #{@books.sample[:name]}"
-    end
+  end
   
   private
   
