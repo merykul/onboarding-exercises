@@ -30,12 +30,17 @@ class Library
   }
   @books << book3
 
-  def find_book(search_variable)
-    @books.find { |book| book.values.include?(search_variable) }
+  def find_books(field, search_variable)
+    case field
+    when :name, :id, :status, :author, :year
+      @books.select { |book| book[value] == search_variable }
+    else
+      puts 'Search field is not valid'
+    end
   end
 
   def update_book_status(id, new_status)
-    book = find_book(id)
+    book = find_books(:id, id)
     if book.nil?
       puts 'Book is not found in the Library'
     else
